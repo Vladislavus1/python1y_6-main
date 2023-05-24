@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="card mb-3">
+        <div class="card-body">
+            <h5 class="card-title">{{ question.title }}</h5>
+            <p class="card-text">{{ question.text }}</p>
+            <p class="card-text">
+                <small class="text-muted">
+                    {{ question.author }} - {{ question.published_date }}
+                </small>
+            </p>
+        </div>
+        <form class="text-center mt-2" method="post" action="/edit_question">
+            {% csrf_token %}
+            {{ edit_form.as_p }}
+            <input type="hidden" name="pk" value="{{ question.pk }}">
+            <input class="btn btn-primary m-2" type="submit" value="Edit">
+        </form>
+    </div>
+{% endblock %}
